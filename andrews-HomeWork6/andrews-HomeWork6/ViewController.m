@@ -39,6 +39,12 @@
 //    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:<#(NSString *)#>]
     [tableView release]; // ??
     
+    UINavigationController *naivagationController = [[UINavigationController alloc] initWithRootViewController:self];
+//    [countriesViewController release];
+    self.window.rootViewController = naivagationController;
+    [naivagationController release];
+
+    
     [self setTitle:@"Devices"];
 }
 

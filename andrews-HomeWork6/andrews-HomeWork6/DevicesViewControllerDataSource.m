@@ -41,16 +41,24 @@
 
 
 -(NSArray *) getDevices:(NSInteger)section {
-    NSArray *devices;
+    NSArray *phones = @[@"iPhone", @"iPhone 3G", @"iPhone 4", @"iPhone 4S", @"iPhone 5", @"iPhone 5S", @"iPhone 6", @"iPhone 6+"];
+    NSArray *tabs = @[@"iPad",@"iPad 2", @"iPad 3", @"iPad 4", @"iPad Air"];
+    NSArray *array;
+    NSDictionary *devices = [[NSDictionary alloc] initWithObjectsAndKeys:
+                             phones, @"herephones",
+                             tabs, @"heretabs",
+                             nil];
+    
     if (section == 0) {
-        devices = [[NSArray alloc] initWithObjects:@"iPhone", @"iPhone 3G", @"iPhone 4", @"iPhone 4S", @"iPhone 5", @"iPhone 5S", @"iPhone 6", @"iPhone 6+", nil];
+        array = [devices objectForKey:@"herephones"];
     } else {
-        devices = [[NSArray alloc] initWithObjects:@"iPad",@"iPad 2", @"iPad 3", @"iPad 4", @"iPad Air", nil];
+        array = [devices objectForKey:@"heretabs"];
     }
     
-    [devices autorelease];
+    [array autorelease];
     
-    return [[devices copy] autorelease];
+    
+    return [[array copy] autorelease];
 }
 
 
