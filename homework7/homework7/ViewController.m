@@ -51,7 +51,7 @@
 
 - (IBAction)segmentation:(UISegmentedControl *)sender
 {
-    _segmentValue.text = [NSString stringWithFormat:@"%d", sender.selectedSegmentIndex+1];
+    _segmentValue.text = [NSString stringWithFormat:@"%ld", sender.selectedSegmentIndex+1];
 }
 
 - (IBAction)textValueChanged:(UITextField *)sender

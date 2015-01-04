@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Car" representedClassName="Car" syncable="YES">
+        <attribute name="model" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="hasEngine" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Engine" inverseName="fromCar" inverseEntity="Engine" syncable="YES"/>
+        <relationship name="hasWheel" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Wheels" inverseName="fromCar" inverseEntity="Wheels" syncable="YES"/>
+    </entity>
+    <entity name="Engine" representedClassName="Engine" syncable="YES">
+        <attribute name="litr" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="fromCar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Car" inverseName="hasEngine" inverseEntity="Car" syncable="YES"/>
+    </entity>
+    <entity name="Event" representedClassName="Event">
+        <attribute name="timeStamp" optional="YES" attributeType="Date">
+            <userInfo/>
+        </attribute>
+        <userInfo/>
+    </entity>
+    <entity name="Wheels" representedClassName="Wheels" syncable="YES">
+        <relationship name="fromCar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Car" inverseName="hasWheel" inverseEntity="Car" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Event" positionX="250" positionY="72" width="128" height="58"/>
+        <element name="Car" positionX="-81" positionY="63" width="128" height="103"/>
+        <element name="Engine" positionX="142" positionY="-18" width="128" height="73"/>
+        <element name="Wheels" positionX="144" positionY="216" width="128" height="58"/>
+    </elements>
+</model>
