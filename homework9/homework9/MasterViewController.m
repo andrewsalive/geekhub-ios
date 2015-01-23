@@ -33,13 +33,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)insertNewObject:(id)sender {
 
+- (void)insertNewObject:(id)sender
+{
     UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:@"Enter name of Event" message:@" " delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     dialog.tag = 5;
     dialog.alertViewStyle = UIAlertViewStylePlainTextInput;
     [dialog show];
-   }
+}
+
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -59,6 +61,7 @@
         // If appropriate, configure the new managed object.
         // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
         [newManagedObject setValue:emailTextField.text forKey:@"name"];
+        [newManagedObject setValue:@"0" forKey:@"status"];
         
         // Save the context.
         NSError *error = nil;
@@ -78,6 +81,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         [[segue destinationViewController] setDetailItem:object];
+        [segue.destinationViewController setContext:self.managedObjectContext];
     }
 }
 
@@ -93,7 +97,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
@@ -121,6 +129,15 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = [[object valueForKey:@"name"] description];
+    
+    NSString *completed;
+    completed = [[object valueForKey:@"status"] description];
+    if ([completed isEqualToString:@"1"]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
 }
 
 #pragma mark - Fetched results controller
