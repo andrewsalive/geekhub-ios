@@ -30,7 +30,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
+    currencies = [NSMutableArray array];
+    [currencies addObject:[self hryvna]];
     [self getCurrencys];
 }
 
@@ -50,9 +51,6 @@
     }
     NSLog(@"%@", dictionary);
     
-    
-    currencies = [NSMutableArray array];
-    [currencies addObject:[self hryvna]];
     for (NSDictionary *current in dictionary) {
         Currency *currency = [[Currency new] initWithDictionary:current];
         [currencies addObject:currency];
